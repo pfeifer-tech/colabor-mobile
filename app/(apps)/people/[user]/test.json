@@ -1,0 +1,15 @@
+{
+   "type": "Accordion",
+   "props": {
+      "title": "Contact Methods",
+      "editPath": "/people/AddUserScreen"
+   },
+   "children": [
+      {
+         "type": "ContactMethod",
+         "props": {
+            "phone": "785.213.1986"
+         }
+      }
+   ]
+}
