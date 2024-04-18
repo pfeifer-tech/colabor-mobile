@@ -1,73 +1,64 @@
-import { View, Text, Pressable } from 'react-native'
-import React, {useState} from 'react'
-import { TextInput } from 'react-native-gesture-handler'
-import { MaterialIcons } from "@expo/vector-icons";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { View, ScrollView } from 'react-native'
+import React from 'react'
+import { GeneratedForm } from '../../../components/Form/GeneratedForm';
 
-function FormTextInput({name, icon, value, updateForm, placeholder, onPress}: {name: string, icon: string, value: string, updateForm: (name: string, value: string) => void, placeholder: string, onPress?: () => void}) {
-  if(!!onPress) {
-    return <Pressable 
-      style={{backgroundColor: '#fff', flexDirection: 'row', margin: 12}}
-      onPress={onPress}
-    >
-      <View style={{flexGrow: 1, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', padding: 4}}>
-        <MaterialIcons name={icon} size={24} color='#919191' />
-        <TextInput style={{color: '#919191'}} 
-          placeholder={placeholder}
-          value={value} 
-          onChangeText={(txt) => updateForm(name, txt)} 
-          editable={false}
-        />
-      </View>
-    </Pressable>
-  }
-  return <View style={{flexGrow: 1, backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', padding: 4, margin: 12}}>
-    <MaterialIcons name={icon} size={24} color='#919191' />
-    <TextInput style={{padding: 4, color: '#919191', flexGrow: 1}} 
-      placeholder={placeholder}
-      value={value} 
-      onChangeText={(txt) => updateForm(name, txt)}
-    />
-  </View>
-}
 
 
 export default function AddUserScreen() {
-  const [form, setForm] = useState({firstName: '', lastName: '', birthday: new Date()})
-  
-  function updateForm(name: string, value: string) {
-    setForm(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  }
-
-  const [showBirthdayPicker, setShowBirthdayPicker] = useState(false)
-
-  function onChange({type}, selectedDate) {
-    if(type === 'set') {
-      setShowBirthdayPicker(false)
-      updateForm('birthday', selectedDate)
+  const dynamicData = [
+    {
+      section: 'Contact Info',
+      inputs: [
+        {name: 'user.firstName', icon: 'person', label: 'First Name', inputType: 'FormTextInput'},
+        {name: 'user.lastName', icon: 'person', label: 'Last Name', inputType: 'FormTextInput'},
+        {name: 'user.birthday', icon: 'calendar-today', label: 'Birthday', inputType: 'FormDateInput'},
+        {name: 'user.phone', icon: 'phone', label: 'Phone', keyboardType: 'numeric', inputType: 'FormTextInput'},
+        {name: 'user.email', icon: 'email', label: 'Email', keyboardType: 'email-address', inputType: 'FormTextInput'},
+        {name: 'user.address', icon: 'location-pin', label: 'Address', inputType: 'FormTextInput'},
+      ]
+    },
+    {
+      section: 'Emergency Contact',
+      inputs: [
+        {name: 'guardian.firstName', icon: 'person', label: 'First Name', inputType: 'FormTextInput'},
+        {name: 'guardian.lastName', icon: 'person', label: 'Last Name', inputType: 'FormTextInput'},
+        {name: 'guardian.phone', icon: 'phone', label: 'Phone', keyboardType: 'numeric', inputType: 'FormTextInput'},
+        {name: 'guardian.email', icon: 'email', label: 'Email', keyboardType: 'email-address', inputType: 'FormTextInput'}
+      ]
     }
-  }
+  ]
+  //         {type: "Text", props: {style: {marginLeft: 12, fontSize: 18, fontWeight: '500'}}, children: "Contact Info"},
+  //         {type: "FormTextInput", props: {name: "firstName", form, icon: "person", label: "First Name"}},
+  //         {type: "FormTextInput", props: {name: "lastName", form, icon: "person", label: "Last Name"}},
+  //         {type: "FormDateInput", props: {name: "birthday", form, label: "Birthday"}},
+  //         {type: "FormTextInput", props: {name: "phone", form, icon: "phone", label: "Phone", keyboardType: 'numeric'}},
+  //         {type: "FormTextInput", props: {name: "email", form, icon: "email", label: "Email", keyboardType: 'email-address'}},
+  //         {type: "FormTextInput", props: {name: "address", form, icon: "location-pin", label: "Address"}},
+  //         // {type: "FormConditional", props:{name: "isStudent", form, value: true}, children:}
+  //       ]
+  //     },
+  //     {
+  //       type: "View", children: [
+  //         {type: "Text", props: {style: {marginLeft: 12, fontSize: 18, fontWeight: '500'}}, children: "Emergency Contact"},
+  //         {type: "FormTextInput", props: {name: "phone", form, icon: "phone", label: "Phone", keyboardType: 'numeric'}},
+  //         {type: "FormTextInput", props: {name: "email", form, icon: "email", label: "Email", keyboardType: 'email-address'}},
+  //         {type: "FormTextInput", props: {name: "address", form, icon: "location-pin", label: "Address"}}
+  //       ]
+  //     },
+  //     {
+  //       type: "View", children: [
+  //         {type: "Text", props: {style: {marginLeft: 12, fontSize: 18, fontWeight: '500'}}, children: "About You"},
+  //         {type: "FormTextInput", props: {name: "phone", form, icon: "phone", label: "Are you in School?", keyboardType: 'numeric'}},
+  //         {type: "FormTextInput", props: {name: "email", form, icon: "email", label: "Email", keyboardType: 'email-address'}},
+  //         {type: "FormTextInput", props: {name: "address", form, icon: "location-pin", label: "Address"}}
+  //       ]
+  //     }
+  //   ]
+  // }
 
   return (
-    <View style={{backgroundColor: 'EFEFEF'}}>
-        <View style={{flexDirection: "column", alignItems: 'center', justifyContent: 'center', marginTop: 20, marginBottom: 20}}>
-          <FormTextInput name="firstName" icon='person' value={form.firstName} updateForm={updateForm} placeholder='First Name' />
-          <FormTextInput name="lastName" icon='person' value={form.lastName} updateForm={updateForm} placeholder='Last Name' />
-          <FormTextInput name="birthday" icon='cake' value={form.birthday.toDateString()} 
-            updateForm={updateForm} placeholder='Birthday' 
-            onPress={() => setShowBirthdayPicker(true)} 
-          />
-          
-          
-          {showBirthdayPicker&&<DateTimePicker
-            mode="date"
-            value={form.birthday}
-            onChange={onChange}
-          />}
-        </View>
-    </View>
+    <ScrollView>
+        <GeneratedForm data={dynamicData} />
+    </ScrollView>
   )
 }

@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React, {ReactNode} from 'react'
 
-const SkillBubble = ({children}: {children?: ReactNode}) => {
+export default function SkillBubble({children}: {children: ReactNode}) {
     const style = {
         backgroundColor: '#CCC', 
         color: '#5E5E5E',
@@ -18,5 +18,3 @@ const SkillBubble = ({children}: {children?: ReactNode}) => {
         </View>
     )
 }
-
-export default SkillBubble

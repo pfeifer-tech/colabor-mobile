@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { Pressable, View } from "react-native";
+import UserNavMenu from "../../../components/UserNavMenu";
 
 export default function PeopleLayout() {
     return <Stack
@@ -10,10 +11,10 @@ export default function PeopleLayout() {
             headerTitle: "Co Labor",
             headerRight: () => (
                 <View style={{flexDirection: 'row'}}>
-                    <Pressable onPress={() => console.log('Search')}>
-                        <MaterialIcons name="search" size={24} color="#fff" style={{paddingLeft: 8, paddingRight: 8}} />
+                    <Pressable onPress={() => console.log('Search')} style={{padding: 8}}>
+                        <MaterialIcons name="search" size={24} color="#fff" />
                     </Pressable>
-                    <MaterialIcons name="menu" size={24} color="#fff" style={{paddingLeft: 8, paddingRight: 8}} />
+                    <UserNavMenu />
                 </View>
             ),
             headerStyle: {

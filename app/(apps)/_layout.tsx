@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
-import { Pressable, View } from "react-native";
+import { Link, Tabs } from "expo-router";
+import { Pressable, View, Text } from "react-native";
+import UserNavMenu from "../../components/UserNavMenu";
 
 
 export default function TabLayout() {
@@ -31,15 +32,15 @@ export default function TabLayout() {
                 headerTintColor: '#fff',
                 headerTitle: "Apps",
                 headerRight: () => (
-                    <View style={{flexDirection: 'row'}}>
-                        <Pressable onPress={() => console.log('Search')}>
-                            <MaterialIcons name="search" size={24} color="#fff" style={{paddingLeft: 8, paddingRight: 8}} />
+                    <View style={{flexDirection: 'row', paddingRight: 16}}>
+                        <Pressable onPress={() => console.log('Search')} style={{padding: 8}}>
+                            <MaterialIcons name="search" size={24} color="#fff" />
                         </Pressable>
-                        <MaterialIcons name="menu" size={24} color="#fff" style={{paddingLeft: 8, paddingRight: 8}} />
+                        <UserNavMenu />
                     </View>
                 ),
                 headerStyle: {
-                    backgroundColor: '#3A3D4B',
+                    backgroundColor: '#3A3D4B'
                 },
                 tabBarIcon: ({ color, size }) => (
                     <MaterialIcons name="apps" size={size} color={color} />
